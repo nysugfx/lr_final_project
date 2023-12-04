@@ -342,6 +342,7 @@ def get_citibike_data():
     all_data['started_at'] = pd.to_datetime(all_data['started_at'], format='mixed')
     all_data['ended_at'] = pd.to_datetime(all_data['ended_at'], format='mixed')
     all_data['ride_duration_secs'] = (all_data['ended_at'] - all_data['started_at']).dt.total_seconds()
+    return all_data
 
 def clean_citibike_data(df: pd.DataFrame) -> pd.DataFrame:
     df['started_at'] = pd.to_datetime(df['started_at'], format='mixed')
