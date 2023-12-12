@@ -56,7 +56,8 @@ def subset_building_data(df: pd.DataFrame) -> pd.DataFrame:
         'last_modified_date_gas_meters',
         'last_modified_date_non',
         'last_modified_date_water',
-        'last_modified_date_property_1'
+        'last_modified_date_property_1',
+        'multifamily_housing_gross'
     ]
 
     energy_use_metrics_columns = [
