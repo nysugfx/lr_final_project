@@ -1,5 +1,4 @@
 data <- read.csv('/Users/alexfriedman/Downloads/lrFinalProject/final_project/final_data.csv')
-
 # data$OOcHU1E <- data$OOcHU1E / data$Pop_1E
 # data$ROcHU1E <- data$ROcHU1E / data$Pop_1E
 data$primary_property_type <- NULL
@@ -21,14 +20,22 @@ data$Pv300t399E <- data$Pv300t399E / data$Pop_1E
 data$Pv400t499E <- data$Pv400t499E / data$Pop_1E
 data$Pv500plE <- data$Pv500plE / data$Pop_1E
 
-model <- lm(site_eui_kbtu_ft~. - X - NTACode, data=data)
+model <- lm(site_eui_kbtu_ft~. - X - NTACode - Pv500plE, data=data)
 summary(model)
+resids <- rstandard(model)
+pred <- predict(model, data=data)
+boxplot(resids)
+title('studentized residuals box plot')
+plot(pred,resids**2, xlab='Site EUI (kBTU/ft) (Pred)', ylab='Squared Studentized Residuals', xlim=c(30, 125), ylim=c(0, 5))
+title('Residuals vs Yhat')
 library(dplyr)
 data2 <- data %>% filter(data$station_count > 0)
 print(nrow(data2))
 model2 <- lm(site_eui_kbtu_ft ~ . - X - NTACode, data=data2)
 summary(model2)
-
+resids <- rstandard(model2)
+pred <- predict(model2, data=data2)
+plot(resids, pred, ylab='Site EUI (kBTU/ft) (Y)', xlab='Studentized Deleted Residuals')
 qqnorm(data$site_eui_kbtu_ft)
 
 reduced_citibike <- lm(site_eui_kbtu_ft ~ . - X - NTACode - n_rides_start - avg_ride_duration_secs_start - n_rides_end - avg_ride_duration_secs_end - station_count, data=data2)
@@ -50,4 +57,8 @@ anova_educ <- anova(reduced_educ, model2)
 anova_residential_occ <- anova(reduced_residential_occ, model2)
 anova_residential_yr <- anova(reduced_residential_yr, model2)
 anova_pv <- anova(red_pv_lvl, model2)
-                        
+
+anova_citi                        
+anova_educ
+anova_building
+anova_pv
