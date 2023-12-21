@@ -10,6 +10,7 @@ data$MgBSciArtE <- data$MgBSciArtE / data$Pop_1E
 data$SrvcE <- data$SrvcE / data$Pop_1E
 data$PvU50E <- data$PvU50E / data$Pop_1E
 data$Pv50t74E <- data$Pv50t74E / data$Pop_1E
+data$Pv75t99E <- data$Pv75t99E / data$Pop_1E
 data$Pv100t124E <- data$Pv100t124E / data$Pop_1E
 data$Pv125t149E <- data$Pv125t149E / data$Pop_1E
 data$Pv150t174E <- data$Pv150t174E / data$Pop_1E
